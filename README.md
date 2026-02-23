@@ -1,4 +1,4 @@
-PAVE Distribution v0.3.8
+PAVE Distribution v0.3.9
 
 Pre-compiled, obfuscated distribution of PAVE.
 
