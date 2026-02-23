@@ -1,0 +1,20 @@
+{
+  "name": "pave",
+  "version": "1.0.0",
+  "description": "PAVE - Personal AI Virtual Environment",
+  "main": "pave.js",
+  "bin": {
+    "pave": "./pave.js"
+  },
+  "scripts": {
+    "start": "node pave.js",
+    "start:ish": "node --expose-gc --jitless --max-old-space-size=128 pave.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "js-yaml": "^4.1.0"
+  }
+}
