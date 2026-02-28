@@ -1,0 +1,9 @@
+# Binary files - served from GitHub Releases
+pave-darwin-arm64
+pave-darwin-x64
+pave-linux-x64
+pave-*
+
+# OS files
+.DS_Store
+Thumbs.db
