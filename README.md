@@ -34,14 +34,14 @@ curl -fsSL https://github.com/cnrai/pave-dist/releases/latest/download/pave-darw
 
 ## 🐧 Linux Installation
 
-### One-Liner (System-wide)
+### Linux x64 (Intel/AMD)
 
+**One-Liner (System-wide):**
 ```bash
 sudo curl -fsSL https://github.com/cnrai/pave-dist/releases/latest/download/pave-linux-x64 -o /usr/local/bin/pave && sudo chmod +x /usr/local/bin/pave
 ```
 
-### Without sudo (User Install)
-
+**Without sudo (User Install):**
 ```bash
 mkdir -p ~/.local/bin && \
 curl -fsSL https://github.com/cnrai/pave-dist/releases/latest/download/pave-linux-x64 -o ~/.local/bin/pave && \
@@ -50,12 +50,61 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && \
 source ~/.bashrc
 ```
 
+### Linux ARM64 (Raspberry Pi, AWS Graviton, NVIDIA Jetson, Ampere)
+
+**One-Liner (System-wide):**
+```bash
+sudo curl -fsSL https://github.com/cnrai/pave-dist/releases/latest/download/pave-linux-arm64 -o /usr/local/bin/pave && sudo chmod +x /usr/local/bin/pave
+```
+
+**Without sudo (User Install):**
+```bash
+mkdir -p ~/.local/bin && \
+curl -fsSL https://github.com/cnrai/pave-dist/releases/latest/download/pave-linux-arm64 -o ~/.local/bin/pave && \
+chmod +x ~/.local/bin/pave && \
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && \
+source ~/.bashrc
+```
+
+### NVIDIA DGX (Grace Hopper / Grace ARM64)
+
+NVIDIA DGX systems built on Grace CPUs (GH200, GB200) and DGX Spark run Linux ARM64. Install the ARM64 binary directly — the same binary used for Graviton/Jetson works without modification:
+
+```bash
+sudo curl -fsSL https://github.com/cnrai/pave-dist/releases/latest/download/pave-linux-arm64 -o /usr/local/bin/pave && \
+sudo chmod +x /usr/local/bin/pave && \
+pave --version
+```
+
+**Verify your DGX is ARM64:**
+```bash
+uname -m   # should print: aarch64
+```
+
+If `uname -m` returns `x86_64` (older DGX A100/H100 Intel-based systems), use the Linux x64 install above instead.
+
+**Optional — SpiderMonkey for sandboxed execution:**
+```bash
+sudo apt install -y libmozjs-91-dev
+sudo ln -sf /usr/bin/js91 /usr/local/bin/js
+```
+
 ### Docker
 
+**linux/amd64:**
 ```bash
 docker run --platform linux/amd64 -it ubuntu:22.04 bash -c "\
   apt update && apt install -y curl && \
   curl -fsSL https://github.com/cnrai/pave-dist/releases/latest/download/pave-linux-x64 -o /usr/local/bin/pave && \
+  chmod +x /usr/local/bin/pave && \
+  pave --version"
+```
+
+**linux/arm64 (DGX, Apple Silicon hosts, Graviton):**
+```bash
+docker run --platform linux/arm64 -it ubuntu:22.04 bash -c "\
+  apt update && apt install -y curl && \
+  curl -fsSL https://github.com/cnrai/pave-dist/releases/latest/download/pave-linux-arm64 -o /usr/local/bin/pave && \
   chmod +x /usr/local/bin/pave && \
   pave --version"
 ```
@@ -119,6 +168,7 @@ apk add spidermonkey
 | macOS | ARM64 (M1/M2/M3/M4) | [pave-darwin-arm64](https://github.com/cnrai/pave-dist/releases/latest/download/pave-darwin-arm64) |
 | macOS | x64 (Intel) | [pave-darwin-x64](https://github.com/cnrai/pave-dist/releases/latest/download/pave-darwin-x64) |
 | Linux | x64 | [pave-linux-x64](https://github.com/cnrai/pave-dist/releases/latest/download/pave-linux-x64) |
+| Linux | ARM64 (Pi, Graviton, Jetson, NVIDIA DGX Grace) | [pave-linux-arm64](https://github.com/cnrai/pave-dist/releases/latest/download/pave-linux-arm64) |
 
 ---
 
